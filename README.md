@@ -1,2 +1,2 @@
-# utils
-Common useful utils
+# Utils
+Useful commands for daily development
