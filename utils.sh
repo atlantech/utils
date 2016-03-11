@@ -85,10 +85,10 @@ function git-util {
         "clear-branches" )
             pattern=${2:-task}
             remote=${3:-origin}
-            branches=$(git branch | grep $pattern)
-            for branch in "$branches" ; do
-                git branch -D $branch
-                git push origin --delete $branch
+            IFS='\n ' read -r -a branches <<< $(git branch | grep $pattern)
+            for branch in "${branches[@]}" ; do
+                (git push origin --force --delete $branch)
+                (git branch -D $branch)
             done
             ;;
         * )
